@@ -8,9 +8,12 @@ import java.util.ArrayList;
 public class IslaNublar implements iTicketed, iSecurity{
 
     private double defaultPrice;
+    private ArrayList<Attraction> attractions;
 
     public IslaNublar(double defaultPrice){
+
         this.defaultPrice = defaultPrice;
+        this.attractions = new ArrayList<Attraction>();
     }
 
 
@@ -37,5 +40,11 @@ public class IslaNublar implements iTicketed, iSecurity{
         return false;
     }
 
+    public void setUpAttraction(Attraction attraction){
+        this.attractions.add(attraction);
+    }
 
+    public ArrayList<Attraction> getAttractions() {
+        return attractions;
+    }
 }

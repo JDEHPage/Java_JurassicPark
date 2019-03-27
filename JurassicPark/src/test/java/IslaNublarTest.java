@@ -1,5 +1,7 @@
-import Park.IslaNublar;
-import Park.Visitor;
+import Attractions.Dinosaur;
+import Park.*;
+import ServicesAndInfo.DinoDiet;
+import ServicesAndInfo.TheatLevel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,6 +10,12 @@ import static org.junit.Assert.assertEquals;
 public class IslaNublarTest {
 
     IslaNublar islaNublar;
+    HerrerasaurusEnclosure herrerasaurusEnclosure;
+    TriceratopsEnclosure triceratopsEnclosure;
+    TyrannosaurusRexEnclosure tyrannosaurusRexEnclosure;
+    Dinosaur dinosaurH;
+    Dinosaur dinosaurT;
+    Dinosaur dinosaurTy;
     Visitor visitor1;
     Visitor visitor2;
     Visitor visitor3;
@@ -17,6 +25,13 @@ public class IslaNublarTest {
 
     @Before
     public void setup(){
+
+        dinosaurH = new Dinosaur("Herrerasaurus", DinoDiet.CARNIVORE, TheatLevel.HIGHT);
+        herrerasaurusEnclosure = new HerrerasaurusEnclosure("Enclosure 10",dinosaurH,10);
+        dinosaurT = new Dinosaur("Triceratops", DinoDiet.HERBIVORE, TheatLevel.MEDIUM);
+        triceratopsEnclosure = new TriceratopsEnclosure("Enclosure 13",dinosaurT,10);
+        dinosaurTy = new Dinosaur("Tyrannosaurus Rex", DinoDiet.CARNIVORE, TheatLevel.DEADLY);
+        tyrannosaurusRexEnclosure = new TyrannosaurusRexEnclosure("Enclosure 20",dinosaurTy,16);
         islaNublar = new IslaNublar(500.00);
         visitor1 = new Visitor(23,2000.00);
         visitor2 = new Visitor(7,750.00);
@@ -57,4 +72,13 @@ public class IslaNublarTest {
     public void canDenyAccessBasedOnAge() {
         assertEquals(false, islaNublar.isAllowedTo(visitor5));
     }
+
+    @Test
+    public void canAddAttractions() {
+        islaNublar.setUpAttraction(herrerasaurusEnclosure);
+        islaNublar.setUpAttraction(tyrannosaurusRexEnclosure);
+        islaNublar.setUpAttraction(triceratopsEnclosure);
+        assertEquals(3,islaNublar.getAttractions().size());
+    }
+    
 }
